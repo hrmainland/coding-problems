@@ -17,7 +17,7 @@ Created:  31 May 2024
 > [Find longest string of 1s after deleting a single element](https://leetcode.com/problems/longest-subarray-of-1s-after-deleting-one-element/description/)
 ___
 
-Use a sliding window when you're asked to find the maximum of something over an array using consecutive elements. Ie. the maximum consecutive string of 1s or the maximum average of consecutive elements 
+Use a sliding window when you're asked to find the maximum of something over an array using consecutive elements. Ie. the maximum consecutive string of 1s or the maximum average of consecutive elements.
 
 #### Approach
 1. Create left and right pointers at 0
@@ -142,25 +142,25 @@ A way of keeping track of the depth is by setting an integer equal to the value 
 This means you'll just hit the current level within that loop.
 
 
-> [!example] DFS with depth tracking
-> ```java
-> Queue<TreeNode> q = new LinkedList<>();
->         int thisDepth = 1;
->         q.add(root);
->         while (q.size() > 0){
->             int rowSize = q.size();
->             System.out.println();
->             System.out.println(thisDepth);
->             while (rowSize > 0){
->                 TreeNode node = q.remove();
->                 System.out.println(node.val);
->                 if (node.left != null) q.add(node.left);
->                 if (node.right != null) q.add(node.right);
->                 rowSize--;
->             }
->             thisDepth++;
->         }
-> ```
+
+```java
+Queue<TreeNode> q = new LinkedList<>();
+        int thisDepth = 1;
+        q.add(root);
+        while (q.size() > 0){
+            int rowSize = q.size();
+            System.out.println();
+            System.out.println(thisDepth);
+            while (rowSize > 0){
+                TreeNode node = q.remove();
+                System.out.println(node.val);
+                if (node.left != null) q.add(node.left);
+                if (node.right != null) q.add(node.right);
+                rowSize--;
+            }
+            thisDepth++;
+        }
+```
 
 ### Binary Search
 ```java
@@ -238,6 +238,7 @@ for (int i =  0; i < m; ++i) {
 
 ### Frequency Dictionaries
 - Use an array as a frequency dictionary if you know the set of keys is small (ie. 26 length array for lower case letters)
+- Work out how to do this in java
 
 ### Repeating array processing ([Dota Senate](https://leetcode.com/problems/number-of-recent-calls))
 - Make queues with the indexes of both sides
