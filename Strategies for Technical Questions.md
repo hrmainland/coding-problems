@@ -1,6 +1,6 @@
-# Coding Problems
+# Strategies for Technical Questions
 
-<span style="font-size: 1.5em;"><b>LeetCode Style Questions</b></span>
+<span style="font-size: 1.5em;"><b>Strategies and Algorithms for Technical Questions</b></span>
 
 Created:  31 May 2024
 
@@ -88,101 +88,6 @@ If you have a target sum of consecutive elements that you're trying to find, you
 
 Look at the [Java response to this question](https://leetcode.com/problems/path-sum-iii/) for an example
 
-### Stack
-
-#### When to use
-- When you have to process a linked list in reverse (iterate over it adding to stack and then pop from the top of the stack)
-- When you have to move through an iterable and update it in some way that is not immediate (ie. you have to remember what to do when you encounter later elements)
-
-### Binary Trees
-#### General Recursive Approach
-- Pass down information that gives **lower** nodes the required info
-- Pass up success or failure information
-- Store global information above the recursive function. Have the recursive function return void and simply update the global variable in the function.
-```java
-int result;
-
-public void recurse(TreeNode root, int params){
-	if (root == null) return;
-	// update result here
-}
-```
-
-#### Avoid making copies when passing down
-The naive approach to passing down information that is unique to each node is to make a copy of the information (for example an array containing all of a node's parents).
-This uses a lot of memory.
-A better way of doing it is to backtrack, whereby you add the node's information to the data structure (ie. the array), do all the stuff you need within the recursive call and just before you pass the success or failure information up to the parent you remove the node's information from the data structure:
-
-```java
-public int recurse(root, info){
-// base case
-// add root to info
-// check children
-// set return value
-// **remove root from info**
-// return 
-}
-
-```
-
-### Depth First Search (DFS)
-
-> [!NOTE] DFS is recursive
-> DFS is a natural fit with recursion. You can do it with a stack but it's less intuitive (for me).
-#### When to Use
-
-
-### Breadth First Search (BFS)
-You'll want to use a queue here.
-
-#### When to Use
-- When you need to perform actions over a single level of a tree.
-
-A way of keeping track of the depth is by setting an integer equal to the value of the size of the queue before you start popping and then pop exactly that many times, pushing as you go.
-This means you'll just hit the current level within that loop.
-
-
-
-```java
-Queue<TreeNode> q = new LinkedList<>();
-        int thisDepth = 1;
-        q.add(root);
-        while (q.size() > 0){
-            int rowSize = q.size();
-            System.out.println();
-            System.out.println(thisDepth);
-            while (rowSize > 0){
-                TreeNode node = q.remove();
-                System.out.println(node.val);
-                if (node.left != null) q.add(node.left);
-                if (node.right != null) q.add(node.right);
-                rowSize--;
-            }
-            thisDepth++;
-        }
-```
-
-### Binary Search
-```java
-class Solution {
-    public int search(int[] nums, int target) {
-        int l=0;
-        int h=nums.length-1;
-        while(l<=h){
-            int mid = (l+h)/2;
-            if(nums[mid]==target){
-                return mid;
-            }
-            if(nums[mid]>target){
-                h = mid-1;
-            }else{
-                l = mid+1;
-            }
-        }
-        return -1;
-    }
-}
-```
 
 ### Find Certain Sequence in Array (Greedy)
 <span style="font-size: 20px;"><b>Examples</b></span>
@@ -250,43 +155,62 @@ for (int i =  0; i < m; ++i) {
 ## Algorithms
 ---
 
-## Data Structures
----
 
-### Linked List
-#### Reverse a Linked List
-Ok this is super easy and you've just gotta remember the steps.
-For the sake of syntax think of this as the nodes staying in the same place but you're making the connections go from left&rarr;right to right&rarr;left
-<span style="font-size: 26px;">The Steps:</span>
-1. Define a new node that will be used to store the node to the left of the one you're dealing with. Set this to null
-2. Iterate over the Linked List and at each point follow these steps:
-	1. Save the node to the right in memory
-	2. Update the outgoing link from the current node
-	3. Save the current node as the left node for the next iteration
-	4. Move the current node along to the right
-3. Return the left node once you run off the right hand side
+### Depth First Search (DFS)
 
-Thats:
-1. Save right
-2. Update link
-3. Save current as left
-4. Move to the right
+> [!NOTE] DFS is recursive
+> DFS is a natural fit with recursion. You can do it with a stack but it's less intuitive (for me).
+#### When to Use
+
+
+### Breadth First Search (BFS)
+You'll want to use a queue here.
+
+#### When to Use
+- When you need to perform actions over a single level of a tree.
+
+A way of keeping track of the depth is by setting an integer equal to the value of the size of the queue before you start popping and then pop exactly that many times, pushing as you go.
+This means you'll just hit the current level within that loop.
+
+
 
 ```java
-public ListNode reverseList(ListNode head) {
-	ListNode leftNode = null;
-	while (head != null){
-		// save right
-		ListNode rightNode = head.next;
-		// reverse link
-		head.next = leftNode;
-		// save current for next iteration
-		leftNode = head;
-		// move to right
-		head = rightNode;
-	}
-	return leftNode;
-}
+Queue<TreeNode> q = new LinkedList<>();
+        int thisDepth = 1;
+        q.add(root);
+        while (q.size() > 0){
+            int rowSize = q.size();
+            System.out.println();
+            System.out.println(thisDepth);
+            while (rowSize > 0){
+                TreeNode node = q.remove();
+                System.out.println(node.val);
+                if (node.left != null) q.add(node.left);
+                if (node.right != null) q.add(node.right);
+                rowSize--;
+            }
+            thisDepth++;
+        }
 ```
 
-					   
+### Binary Search
+```java
+class Solution {
+    public int search(int[] nums, int target) {
+        int l=0;
+        int h=nums.length-1;
+        while(l<=h){
+            int mid = (l+h)/2;
+            if(nums[mid]==target){
+                return mid;
+            }
+            if(nums[mid]>target){
+                h = mid-1;
+            }else{
+                l = mid+1;
+            }
+        }
+        return -1;
+    }
+}
+```
