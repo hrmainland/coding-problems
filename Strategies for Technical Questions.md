@@ -121,7 +121,23 @@ This will keep a min and a mid that are not necessarily "in order" but are alway
 - Move left pointer if its lower than the right
 - Move the right pointer if it's lower than the left
 - Stop when the pointers meet
-___
+
+### Vectors to move through grid
+Say you need to move in all 8 straight lines on a grid (like a chess queen) you can set vectors as tuples and use them to increment your position like this:
+
+```python
+directions = [(-1, 0), (-1, 1), (0, 1), (1, 1),
+			  (1, 0), (1, -1), (0, -1), (-1, -1)]
+
+row, col = 2, 3
+
+for row_change, col_change in direcetions:
+	while 0 < row < max_row and 0 < col < max_col:
+		row += row_change
+		col += col_change
+		# logic
+
+```
 
 
 ## Individual Approaches
