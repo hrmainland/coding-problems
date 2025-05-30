@@ -11,6 +11,8 @@ Created:  31 May 2024
 #### When to use
 - If you have to add numbers to reach a target number
     - ie. how many ways can you add two numbers in this list to equal x
+    - Set up pointers at top and bottom of array
+- 
 
 ### Sliding Window
 <span style="font-size: 20px;"><b>Examples</b></span>
